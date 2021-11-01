@@ -25,6 +25,13 @@ BigInteger::BigInteger(const std::string &source)
 	size = i;
 }
 
+const BigInteger &BigInteger::operator = (const BigInteger &other)
+{
+	size = other.size;
+	digits = other.digits;
+
+	return *this;
+}
 std::ostream &operator << (std::ostream &out, const BigInteger &num)
 {
 	for (size_t i = 0, j = 0; i < num.size; i++)

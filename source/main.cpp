@@ -3,9 +3,11 @@
 
 int main()
 {
-	BigInteger num("1420");
-
-	std::cout << num << '\n';
+	BigInteger n1("1420");
+	BigInteger n2("999");
+	std::cout << n2 << '\n';
+	n2 = n1;
+	std::cout << n2 << '\t' << n1 << '\n';
 
 	return 0;
 }
