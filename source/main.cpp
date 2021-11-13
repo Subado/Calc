@@ -1,13 +1,33 @@
 #include <iostream>
+#include <ctime>
 #include "BigInteger.h"
+
+// Generates a string containing random digits.
+std::string genRandStrNum()
+{
+	std::string str{};
+
+	for (size_t i = 0; i < rand() % 15 + 1; i++)
+	{
+		str += 48 + rand() % 10;
+
+		if (!((str[i] - 48) && i) && !((str[i] - 48) || i))
+		{
+			str[i] = rand() % 9 + 1;
+		}
+	}
+
+	return str;
+}
 
 int main()
 {
-	BigInteger n1("1420");
-	BigInteger n2("999");
-	std::cout << n2 << '\n';
-	n2 = n1;
-	std::cout << n2 << '\t' << n1 << '\n';
+	srand(time(0));
 
+	std::string s1{ genRandStrNum() }, s2{ genRandStrNum() };
+	BigInteger n1(s1), n2(s2);
+
+	std::cout << '\n' << s1 << '\n' << n1 << "\n\n" <<
+		s2 << '\n' << n2 << '\n';
 	return 0;
 }

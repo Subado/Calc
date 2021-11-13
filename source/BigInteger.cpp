@@ -3,49 +3,58 @@
 #include <cstddef>
 
 BigInteger::BigInteger(const std::string &source)
-	: size{ 0 }
+	: length{ 0 }
 {
-	size_t i;
-	for (i = 0; i < source.size(); i++)
-	{
-		if (!(std::regex_match(std::string(1, source[i]), std::regex("[0-9]"))))
-		{
-			digits.clear();
-			break;
-		}
-		else if (i % 2 == 0)
-		{
-			digits.push_back((source[i] - 48) << 4);
-		}
-		else
-		{
-			digits[digits.size() - 1] |= source[i] - 48;
-		}
-	}
-	size = i;
+	stringToBigInteger(source, *this);
 }
 
 const BigInteger &BigInteger::operator = (const BigInteger &other)
 {
-	size = other.size;
+	length = other.length;
 	digits = other.digits;
 
 	return *this;
 }
+
 std::ostream &operator << (std::ostream &out, const BigInteger &num)
 {
-	for (size_t i = 0, j = 0; i < num.size; i++)
+	for (size_t i = num.length - 1, j = num.digits.size() - 1; i != size_t(-1); i--)
 	{
 		if (i % 2 == 0)
 		{
-			out << (num.digits[j] >> 4);
+			out << (num.digits[j] & 0x0f);
+			j--;
 		}
 		else
 		{
-			out << (num.digits[j] & 0x0F);
-			j++;
+			out << (num.digits[j] >> 4);
 		}
 	}
 
 	return out;
+}
+
+void stringToBigInteger(std::string source, BigInteger &dest)
+{
+	std::reverse(source.begin(), source.end());
+
+	size_t i;
+	for (i = 0; i < source.length(); i++)
+	{
+		if (!(std::regex_match(std::string(1, source[i]), std::regex("[0-9]")))) // Checking that all chars are digits.
+		{
+			dest.digits.clear();
+			break;
+		}
+		else if (i % 2 == 0)
+		{
+			dest.digits.push_back(source[i] - 48);
+		}
+		else
+		{
+			dest.digits[dest.digits.size() - 1] |= ((source[i] - 48) << 4);
+		}
+	}
+
+	dest.length = i;
 }
