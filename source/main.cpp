@@ -28,7 +28,8 @@ int main()
 	std::string s1{ genRandStrNum() }, s2{ genRandStrNum() };
 	BigInteger n1(s1), n2(s2);
 
-	std::cout << "First num:\n" << s1 << '\n' << n1 << "\n\nSecond num:\n" <<
-        s2 << '\n' << n2 << '\n';
+	std::cout << '\n' << ((n1 == s1) ? ("[OK]") : ("[ERR]")) << "\ns1: " << s1 << "\nn1: " << n1 << "\n\n\n" <<
+		((n2 == s2) ? ("[OK]") : ("[ERR]")) << "\ns2: " << s2 << "\nn2: " << n2 << "\n\n" <<
+		"n1 > n2 == " << std::boolalpha << (n1 > n2) << "\n\n";
 	return 0;
 }
