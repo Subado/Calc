@@ -33,7 +33,7 @@ bool BigInteger::operator > (const BigInteger &other)
 
 	for (size_t i = digits.size() - 1; i != size_t(-1); i--)
 	{
-		if (other.digits[i] > digits[i])
+		if (digits[i] <= other.digits[i])
 		{
 			return false;
 		}
@@ -48,14 +48,18 @@ bool BigInteger::operator >= (const BigInteger &other)
 	{
 		return true;
 	}
-	else if (other.length > length)
+	if (other.length > length)
 	{
 		return false;
+	}
+	if (digits == other.digits)
+	{
+		return true;
 	}
 
 	for (size_t i = digits.size() - 1; i != size_t(-1); i--)
 	{
-		if (digits[i] < other.digits[i])
+		if (other.digits[i] > digits[i])
 		{
 			return false;
 		}
