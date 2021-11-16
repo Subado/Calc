@@ -30,6 +30,9 @@ int main()
 
 	std::cout << '\n' << ((n1 == s1) ? ("[OK]") : ("[ERR]")) << "\ns1: " << s1 << "\nn1: " << n1 << "\n\n\n" <<
 		((n2 == s2) ? ("[OK]") : ("[ERR]")) << "\ns2: " << s2 << "\nn2: " << n2 << "\n\n" <<
-		"n1 > n2 == " << std::boolalpha << (n1 > n2) << "\n\n";
+		"n1 > n2 == " << std::boolalpha << (n1 > n2) << '\n' <<
+		"n1 >= n2 == " << std::boolalpha << (n1 >= n2) << '\n' <<
+		"n1 < n2 == " << std::boolalpha << (n1 < n2) << '\n' <<
+		"n1 <= n2 == " << std::boolalpha << (n1 <= n2) << "\n\n";
 	return 0;
 }
