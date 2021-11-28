@@ -6,8 +6,16 @@
 std::string genRandStrNum()
 {
 	std::string str{};
+	size_t i = 0;
+
+	if (rand() % 2)
+	{
+		str += '-';
+		i++;
+	}
+
 	size_t size = rand() % 15 + 1;
-	for (size_t i = 0; i < size; i++)
+	for (; i < size; i++)
 	{
 		str += 48 + rand() % 10;
 

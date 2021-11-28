@@ -8,6 +8,7 @@
 
 class BigInteger
 {
+	bool sign;
 	size_t length;
 	std::vector<uint8_t> digits;
 public:
@@ -27,6 +28,8 @@ public:
 	bool operator == (const std::string &other);
 	bool operator != (const BigInteger &other);
 	bool operator != (const std::string &other);
+
+	BigInteger operator + (const BigInteger &other);
 
 	friend std::ostream &operator << (std::ostream &out, const BigInteger &num);
 	friend void stringToBigInteger(std::string source, BigInteger &dest);

@@ -3,7 +3,7 @@
 #include <sstream>
 #include <cstddef>
 
-BigInteger::BigInteger() : length{ 0 }
+BigInteger::BigInteger() : length{ 0 }, sign{ false }
 {
 }
 
@@ -181,8 +181,22 @@ bool BigInteger::operator != (const std::string &other)
 
 }
 
+BigInteger operator + (const BigInteger &other)
+{
+	BigInteger res;
+
+
+
+	return res;
+}
+
 std::ostream &operator << (std::ostream &out, const BigInteger &num)
 {
+	if (num.sign)
+	{
+		out << '-';
+	}
+
 	for (size_t i = num.length - 1, j = num.digits.size() - 1; i != size_t(-1); i--)
 	{
 		if (i % 2 == 0)
@@ -201,6 +215,12 @@ std::ostream &operator << (std::ostream &out, const BigInteger &num)
 
 void stringToBigInteger(std::string source, BigInteger &dest)
 {
+	if (source[0] == '-')
+	{
+		dest.sign = true;
+		source.erase(source.begin());
+	}
+
 	std::reverse(source.begin(), source.end());
 
 	size_t i;
@@ -234,7 +254,14 @@ BigInteger stringToBigInteger(const std::string &source)
 
 bool isanum(const std::string &str)
 {
-	for (size_t i = 0; i < str.length(); i++)
+	size_t i = 0;
+
+	if (str[0] == '-')
+	{
+		i++;
+	}
+
+	for (; i < str.length(); i++)
 	{
 		if (!(std::regex_match(std::string(1, str[i]), std::regex("[0-9]")))) // Checking that all chars are digits.
 		{
